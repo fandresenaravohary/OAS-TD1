@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: Onboarding API
+  description: STD22058
+  version: 1.0.1
+  contact:
+    email: hei.fandresena@gmail.com
+    name: fandresena
+servers:
+  - url: https://STD22058
+paths:
+  /students:
+    get:
+      responses:
+        "200":
+          description: Successful response with a list of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/students'
+      description: Fetches a list of students
+    post:
+      responses:
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+  /students/{studentId}:
+    get:
+      responses:
+        "200":
+          description: Successful response with student details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/students'
+        "400":
+          description: Bad request
+        "404":
+          description: Student not found
+      parameters:
+        - in: path
+          name: studentId
+          schema:
+            type: integer
+          required: true
+          description: ID of the student to retrieve
+components:
+  schemas:
+    students:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        birthdate:
+          type: string
+          format: date
+      example:
+        id: 1
+        name: Fandresena
+        birthdate: 2004-09-09
+    
