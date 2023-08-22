@@ -23,10 +23,10 @@ paths:
       description: Fetches a list of students
     post:
       responses:
+        "201":
+          description: Student created successfully
         "400":
           description: Bad request
-        "404":
-          description: Not found
   /students/{studentId}:
     get:
       responses:
@@ -47,6 +47,42 @@ paths:
             type: integer
           required: true
           description: ID of the student to retrieve
+    put:
+      responses:
+        "200":
+          description: Student updated successfully
+        "400":
+          description: Bad request
+        "404":
+          description: Student not found
+      parameters:
+        - in: path
+          name: studentId
+          schema:
+            type: integer
+          required: true
+          description: ID of the student to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/students'
+    delete:
+      responses:
+        "204":
+          description: Student deleted successfully
+        "400":
+          description: Bad request
+        "404":
+          description: Student not found
+      parameters:
+        - in: path
+          name: studentId
+          schema:
+            type: integer
+          required: true
+          description: ID of the student to delete
 components:
   schemas:
     students:
@@ -63,4 +99,9 @@ components:
         id: 1
         name: Fandresena
         birthdate: 2004-09-09
-    
+
+
+
+
+
+
