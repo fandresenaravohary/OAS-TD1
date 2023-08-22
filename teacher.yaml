@@ -1,0 +1,50 @@
+openapi: 3.0.1
+info:
+  title: Onboarding API
+  description: The teachers with their subjects
+  version: 1.0.1
+paths:
+  /teacher/{teacher}:
+    parameters:
+      - in: path
+        name: teacher
+        schema:
+          type: string
+        required: true
+        description: ID de l'enseignant
+    get:
+      summary: Récupérer les informations sur un enseignant
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                teacher: Tokimahery Ramarozaka
+                matieres:
+                  - matiere: WEB
+                    code: WEB1
+                  - matiere: Algorithmique
+                    code: PROG1
+                  - matiere: POO
+                    code: PROG2
+    post:
+      summary: Ajouter une nouvelle matière pour un enseignant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                matiere:
+                  type: string
+                  description: Nom de la matière
+                code:
+                  type: string
+                  description: Code de la matière
+      responses:
+        '201':
+          description: Créé avec succès
+        '400':
+          description: Requête incorrecte
